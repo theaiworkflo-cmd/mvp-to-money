@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MVP to Money</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+body {
+    font-family: Inter, system-ui, sans-serif;
+}
+
+/* Intellectual property protection */
+.protected {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.protected::selection {
+    background: transparent;
+}
+
+</style>
+
+</head>
+
+
+<body class="bg-gray-950 text-white min-h-screen">
+
+
+<!-- LOGIN SCREEN -->
+
+<div id="loginScreen" class="min-h-screen flex items-center justify-center bg-gray-950">
+
+    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 w-full max-w-md shadow-xl">
+
+        <h1 class="text-3xl font-bold mb-2 text-center">
+            MVP to Money
+        </h1>
+
+        <p class="text-gray-400 text-center mb-8">
+            Enter your Access Key
+        </p>
+
+
+        <input
+        id="accessInput"
+        type="password"
+        placeholder="Access Key"
+        class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 mb-4 outline-none focus:border-blue-500"
+        >
+
+
+        <button
+        onclick="unlock()"
+        class="w-full bg-blue-600 hover:bg-blue-700 rounded-lg py-3 font-semibold">
+            Enter Course
+        </button>
+
+
+        <p id="loginError"
+        class="text-red-400 text-center mt-4 hidden">
+            Incorrect Access Key
+        </p>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboard"
+class="hidden min-h-screen flex">
+
+
+<!-- SIDEBAR -->
+
+<aside class="w-72 bg-gray-900 border-r border-gray-800 p-6">
+
+
+<h1 class="text-2xl font-bold mb-8">
+MVP to Money
+</h1>
+
+
+<nav class="space-y-3">
+
+
+<button onclick="showStage('idea')"
+class="stageBtn w-full text-left px-4 py-3 rounded-lg bg-gray-800 hover:bg-gray-700">
+💡 Idea
+</button>
+
+
+<button onclick="showStage('build')"
+class="stageBtn w-full text-left px-4 py-3 rounded-lg bg-gray-800 hover:bg-gray-700">
+🛠 Build
+</button>
+
+
+<button onclick="showStage('money')"
+class="stageBtn w-full text-left px-4 py-3 rounded-lg bg-gray-800 hover:bg-gray-700">
+💰 Money
+</button>
+
+
+<button onclick="showStage('launch')"
+class="stageBtn w-full text-left px-4 py-3 rounded-lg bg-gray-800 hover:bg-gray-700">
+🚀 Launch
+</button>
+
+
+</nav>
+
+
+</aside>
+
+
+
+
+<!-- CONTENT -->
+
+<main class="flex-1 p-10 overflow-y-auto">
+
+
+<h2 id="stageTitle"
+class="text-4xl font-bold mb-8">
+Welcome to MVP to Money
+</h2>
+
+
+<div id="contentArea"
+class="space-y-6">
+
+
+<div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+
+<h3 class="text-xl font-semibold mb-3">
+Your AI Startup Roadmap
+</h3>
+
+<p class="text-gray-400">
+Choose a stage from the menu to begin.
+</p>
+
+</div>
+
+
+</div>
+
+
+</main>
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+const ACCESS_KEY = "LAUNCH2026";
+
+
+
+function unlock(){
+
+let input =
+document.getElementById("accessInput").value;
+
+
+if(input === ACCESS_KEY){
+
+document.getElementById("loginScreen").classList.add("hidden");
+
+document.getElementById("dashboard").classList.remove("hidden");
+
+}
+
+else{
+
+document.getElementById("loginError")
+.classList.remove("hidden");
+
+}
+
+}
+
+
+
+
+
+const stages = {
+
+
+idea: {
+
+title:"Stage 1: Idea",
+
+modules:[
+
+{
+name:"Module 1: Find Your Business Idea",
+
+prompt:
+"Define your target customer. Identify their biggest problem. Create a solution that removes pain, saves time, or creates value."
+},
+
+
+{
+name:"Module 2: Validate The Market",
+
+prompt:
+"Research competitors, customer demand, pricing models, and proof that people are willing to pay."
+}
+
+]
+
+},
+
+
+
+build:{
+
+title:"Stage 2: Build",
+
+modules:[
+
+{
+name:"Module 3: Create Your MVP",
+
+prompt:
+"Design the smallest version of your product that solves one important customer problem."
+},
+
+
+{
+name:"Module 4: Use AI Development Tools",
+
+prompt:
+"Use AI coding assistants, no-code platforms, and automation tools to build faster."
+}
+
+]
+
+},
+
+
+
+money:{
+
+title:"Stage 3: Money",
+
+modules:[
+
+{
+name:"Module 5: Pricing Strategy",
+
+prompt:
+"Create pricing based on customer value, market position, and recurring revenue opportunities."
+},
+
+
+{
+name:"Module 6: Sales System",
+
+prompt:
+"Build a repeatable process for finding customers, starting conversations, and converting sales."
+}
+
+]
+
+},
+
+
+
+launch:{
+
+title:"Stage 4: Launch",
+
+modules:[
+
+{
+name:"Module 7: Go To Market",
+
+prompt:
+"Create your launch plan including audience, marketing channels, content strategy, and customer acquisition."
+},
+
+
+{
+name:"Module 8: Scale",
+
+prompt:
+"Improve systems, automate operations, measure results, and grow revenue sustainably."
+}
+
+]
+
+}
+
+
+};
+
+
+
+
+
+
+function showStage(stage){
+
+
+const data = stages[stage];
+
+
+document.getElementById("stageTitle")
+.innerText=data.title;
+
+
+
+let html="";
+
+
+data.modules.forEach(module=>{
+
+
+html += `
+
+<div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+
+
+<h3 class="text-xl font-bold mb-4">
+${module.name}
+</h3>
+
+
+<div class="protected bg-gray-950 border border-gray-700 rounded-lg p-5 text-gray-300">
+
+${module.prompt}
+
+</div>
+
+
+</div>
+
+`;
+
+
+});
+
+
+document.getElementById("contentArea").innerHTML=html;
+
+
+}
+
+
+
+document.addEventListener(
+"contextmenu",
+function(e){
+
+if(e.target.classList.contains("protected")){
+e.preventDefault();
+}
+
+}
+);
+
+
+</script>
+
+
+</body>
+</html>
